@@ -14,6 +14,7 @@ from rest_framework import mixins
 from rest_framework import permissions
 from django.contrib.auth.models import User
 from snippets.serializers import UserSerializer
+from snippets.permissions import IsOwnerOrReadOnly
 
 
 # Create your views here.
@@ -84,7 +85,8 @@ class SnippetDetail(mixins.RetrieveModelMixin,
                     generics.GenericAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly, )
 
 
     def get(self, request, *args, **kwargs):
