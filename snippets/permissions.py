@@ -2,6 +2,7 @@
 
 from rest_framework import permissions
 
+
 class IsOwnerOrReadOnly(permissions.BasePermission):
 
     '''
@@ -9,8 +10,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
     '''
 
     def has_object_permission(self, request, view, obj):
-        #we are allowting read permissions for all requests
-
+        #we are allowting read permissions for all requests.
 
         if request.method in permissions.SAFE_METHODS:
             return True
